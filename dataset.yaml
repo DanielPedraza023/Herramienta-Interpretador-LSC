@@ -1,0 +1,5 @@
+train: D:\Datos\Desktop\CODIGOS\TESISFINAL\DATASET\train/
+val: D:\Datos\Desktop\CODIGOS\TESISFINAL\DATASET\val/
+test: 
+nc: 27
+names: ["ESPACIO", "P", "Z", "R", "G", "E", "O", "L", "W", "N", "T", "Y", "A", "X", "I", "B", "M", "U", "C", "H", "S", "D", "Q", "K", "F", "J", "V"]
