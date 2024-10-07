@@ -109,10 +109,49 @@ while True:
     # Leer el teclado
     t = cv2.waitKey(1)
 
-    if t == 27:
+    if t == 27: #Tecla escape
         break
     
+    elif t == 13: #Tecla enter
+        if not señales_reconocidas:
+            print("No se ha detectado ninguna señal")
+            reproducir_audio("No se ha detectado ninguna señal")
+        
+        else:
+            # Convertir cada lista de señales en una cadena
+            palabras = []
+            
+            palabra_actual = ''
+            for señal in señales_reconocidas:
+                if señal == " ":
+                    palabras.append(palabra_actual)
+                    palabra_actual = ''  # Reiniciar palabra actual después de un espacio
+                else:
+                    palabra_actual += señal
+            palabras.append(palabra_actual)  # Agregar la última palabra
+
+            # Unir todas las palabras en una sola cadena
+            palabra_completa = ' '.join(palabras)
+
+            print("Palabra completa formada por las señales reconocidas:", palabra_completa)
+            reproducir_audio(palabra_completa)
+
+        señales_reconocidas = []
+        palabra_actual = ''
+        ultima_señal = None
+        ultima_deteteccion_tiempo = 0
     
+    elif t == 8:  # Tecla de borrar (retroceso)
+        if señales_reconocidas:
+            señales_reconocidas.pop()  # Eliminar la última señal
+            palabra_actual = palabra_actual[:-1]  # Eliminar la última letra de la palabra en construcción
+            print("Última letra eliminada. Palabra actual:", palabra_actual)
+    
+    elif t== 32: #Tecla espacio
+        señales_reconocidas = []
+        palabra_actual = ''
+        ultima_señal = None
+        ultima_deteteccion_tiempo = 0
 
 cap.release()
 cv2.destroyAllWindows()
